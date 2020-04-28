@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'compraventa', 'templates'),
+            os.path.join(BASE_DIR, 'talentapp', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -103,3 +104,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "talentapp", 'static'),
+]
+
+AUTH_USER_MODEL = 'usuario.Usuario'
+
+LOGIN_REDIRECT_URL = 'usuario.login'
+LOGIN_URL = 'usuario.login'
