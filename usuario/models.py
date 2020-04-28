@@ -9,7 +9,8 @@ class Usuario(AbstractUser):
     email = models.EmailField(_('direccion de correo electronico'), unique=True)
     first_name = models.CharField(_('Nombres'), max_length=40)
     last_name = models.CharField(_('Apellidos'), max_length=40)
-
+    is_applicant_user = models.BooleanField(_('Es usuario aspirante'), default=False)
+    is_business_user = models.BooleanField(_('Es usuario empresarial'), default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
