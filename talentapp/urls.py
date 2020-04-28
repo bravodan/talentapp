@@ -21,4 +21,5 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('', include('usuario.urls'), name='usuario'),
+    path('', include('convocatoria.urls'), name='convocatoria'),
 ]
