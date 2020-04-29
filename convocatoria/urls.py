@@ -1,5 +1,8 @@
 from django.urls import path
+from .views import CreateJobOfferView, AllJobOffersListView, JobOfferDetailView
 
 urlpatterns = [
-  #path('class_based_view', AllPostsView.as_view(), name='blog.post_cbv'),
+    path('crearConvocatoria', CreateJobOfferView.as_view(), name='convocatoria.crear'),
+    path('misConvocatorias', AllJobOffersListView.as_view(), name='convocatoria.listar'),
+    path('convocatoria/<int:pk>', JobOfferDetailView.as_view(), name='convocatoria.detalles'),
 ]

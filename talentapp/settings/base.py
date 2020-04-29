@@ -112,5 +112,5 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'usuario.Usuario'
 
-LOGIN_REDIRECT_URL = 'usuario.login'
+LOGIN_REDIRECT_URL = 'convocatoria.listar'
 LOGIN_URL = 'usuario.login'

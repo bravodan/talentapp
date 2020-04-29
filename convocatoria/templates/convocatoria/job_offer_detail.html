@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<h1 class="text-center mt-4">Oferta laboral para {{ object.job_title }}</h1>
+<div class="row justify-content-center mt-4">
+    <div class="card text-white bg-dark col-md-auto text-center">
+        <div class="card-header">
+            Detalles de la convocatoria
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ object.job_title }}</h5>
+            <p class="card-text">{{ object.description }}</p>
+            <p class="card-text">Finaliza el {{ object.closing_date_time }}</p>
+            <p class="card-text">Estado: {{ object.get_status_display }}</p>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center mt-4">
+    <button class="btn btn-primary" onclick="javascript:history.back();">Volver</button>
+</div>
+{% endblock %}
