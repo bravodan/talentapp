@@ -3,9 +3,11 @@ from django.views.generic import FormView, ListView, DetailView
 from .forms import JobOfferForm
 from .models import Convocatoria, Postulacion, PostulacionAnonima
 from datetime import date
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
-
+@method_decorator(login_required, name='dispatch')
 class CreateJobOfferView(FormView):
     form_class = JobOfferForm
     template_name = 'convocatoria/create_job_offer.html'
@@ -15,7 +17,8 @@ class CreateJobOfferView(FormView):
         form.instance.company = self.request.user
         form.save()
         return super().form_valid(form)
-
+        
+@method_decorator(login_required, name='dispatch')
 class AllJobOffersListView(ListView):
     model = Convocatoria
     template_name = 'convocatoria/all_job_offers.html'
@@ -31,6 +34,7 @@ class AllJobOffersListView(ListView):
         context['today'] = date.today()
         return context
 
+@method_decorator(login_required, name='dispatch')
 class JobOfferDetailView(DetailView):
     model = Convocatoria
     template_name = 'convocatoria/job_offer_detail.html'
