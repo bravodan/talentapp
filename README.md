@@ -48,7 +48,7 @@ _python manage.py test_
 _ejecute el comando despues de realizar la instalacion para empezar a usar_
 
 ```
-_python manage.py runserver
+python manage.py runserver
 ```
 
 ## Construido con 🛠️
