@@ -20,8 +20,6 @@ pip install pipenv
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
 _Instala las dependencias del proyecto mediante pipenv_
 
 ```
@@ -39,8 +37,6 @@ _Aplica las migraciones_
 ```
 python manage.py migrate
 ```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
 ## Ejecutando las pruebas ⚙️
 
