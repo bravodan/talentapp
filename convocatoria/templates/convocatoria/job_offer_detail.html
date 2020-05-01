@@ -22,52 +22,42 @@
 <div class="row justify-content-center">
     <div class="col-4">
         <h4 class="text-center"> Registrados </h4>
-        <div class="accordion mt-4" id="accordionRegistrados">
-            {% for user in applicants_users %}
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{ user.id }}"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            user.first_name
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="{{ user.id }}" class="collapse show" aria-labelledby="headingOne"
-                    data-parent="#accordionRegistrados">
-                    <div class="card-body">
-                        user.last_name
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="justify-content-center text-center">
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for apply in applications %}
+                <tr class="justify-content-center text-center">
+                    <th scope="row">{{apply.candidate.first_name}}</th>
+                    <th scope="row">{{apply.candidate.last_name}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
     </div>
 
     <div class="col-4">
         <h4 class="text-center"> Anónimos </h4>
-        <div class="accordion mt-4" id="accordionAnonimos">
-            {% for user in anonymous_applicants %}
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            user.full_name
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                    data-parent="#accordionAnonimos">
-                    <div class="card-body">
-                        user.curriculum
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="justify-content-center text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Curriculo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in anonymous_applicants %}
+                <tr class="justify-content-center text-center">
+                    <th scope="row">{{user.full_name}}</th>
+                    <td><a href="{{ user.curriculum.url }}" download>Descargar curriculum</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="row justify-content-center mt-4">

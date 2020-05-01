@@ -1,0 +1,36 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-auto text-center">
+        <h1 class="">Mis convocatorias</h1>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Fecha de cierre</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for apply in all_applications %}
+                <tr>
+                    <td scope="col">{{ apply.announcement.job_title }}</td>
+                    {% if today >= apply.announcement.closing_date_time or apply.announcement.status != "1" %}
+                        <td class="text-danger" scope="col">TERMINADA</td>
+                    {% else %}
+                        <td scope="col">{{ apply.announcement.closing_date_time }}</td>
+                    {% endif %}
+                    <td scope="col">{{ apply.announcement.get_status_display }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,12 +1,17 @@
 {% extends 'master.html' %}
 
 {% block content %}
+{% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-primary text-center" role="alert">
+                <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+            </div> 
+        {% endfor %}
+{% endif %}
+
 <div class="row justify-content-center mt-4 mb-4">
     <div class="col-md-auto text-center">
-        <h1 class="">Mis convocatorias</h1>
-    </div>
-    <div class="col-md-auto justify-content-end">
-        <a class="btn btn-success" href="/crearConvocatoria">Registrar convocatoria</a>
+        <h1 class="">Lista de convocatorias</h1>
     </div>
 </div>
 <div class="row justify-content-center">
@@ -15,24 +20,33 @@
             <thead>
                 <tr>
                     <th scope="col">Cargo</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Descripción</th>
                     <th scope="col">Fecha de cierre</th>
-                    <th scope="col">Numero de inscritos</th>
                 </tr>
             </thead>
             <tbody>
-                {% for job_offer in all_job_offers %}
+                {% for job_offer in object_list %}
                 <tr>
                     <td>{{ job_offer.job_title }}</td>
-                    {% if today > job_offer.closing_date_time.date or job_offer.status != "1" %}
+                    <td>{{ job_offer.company }}</td>
+                    <td>{{ job_offer.description }}</td>
+                    {% if today >= job_offer.closing_date_time or job_offer.status != "1" %}
                     <td class="text-danger" scope="col">TERMINADA</td>
                     {% else %}
                     <td scope="col">{{ job_offer.closing_date_time }}</td>
-                    {% endif %}
-                    <td>{{ applicants_number}}</td>
+                    {% if not user.is_authenticated %}
                     <td>
-                        <a href="{% url 'convocatoria.detalles' job_offer.id %}" class="btn btn-primary">Detalles de
-                            convocatoria</a>
+                        <a href="{% url 'convocatoria.aplicarAnonimo' job_offer.id %}"
+                            class="btn btn-primary">Aplicar</a>
                     </td>
+                    {% elif user.is_candidate_user == True %}
+                    <td>
+                        <a href="{% url 'convocatoria.aplicarAspirante' job_offer.id %}"
+                            class="btn btn-primary">Aplicar</a>
+                    </td>
+                    {% endif %}
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

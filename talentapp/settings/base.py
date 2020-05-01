@@ -29,8 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'usuario',
     'convocatoria',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -112,5 +114,21 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'usuario.Usuario'
 
-LOGIN_REDIRECT_URL = 'convocatoria.listar'
+LOGIN_REDIRECT_URL = 'convocatoria.convocatorias'
+LOGOUT_REDIRECT_URL = 'convocatoria.convocatorias'
 LOGIN_URL = 'usuario.login'
+
+MEDIA_URL = '/media/' # path de la URL se sirven los archivos
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #directorio que almacena los archivos subidos
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.ROOT_SCHEMA',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware'
+    ]
+}
+
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

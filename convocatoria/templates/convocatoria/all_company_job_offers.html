@@ -1,0 +1,42 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-auto text-center">
+        <h1 class="">Mis convocatorias</h1>
+    </div>
+    <div class="col-md-auto justify-content-end">
+        <a class="btn btn-success" href="/crearConvocatoria">Registrar convocatoria</a>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Fecha de cierre</th>
+                    <th scope="col">Numero de inscritos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job_offer, count in all_job_offers %}
+                <tr>
+                    <td>{{ job_offer.job_title }}</td>
+                    {% if today >= job_offer.closing_date_time or job_offer.status != "1" %}
+                    <td class="text-danger" scope="col">TERMINADA</td>
+                    {% else %}
+                    <td scope="col">{{ job_offer.closing_date_time }}</td>
+                    {% endif %}
+                    <td>{{ count }}</td>
+                    <td>
+                        <a href="{% url 'convocatoria.detalles' job_offer.id %}" class="btn btn-primary">Detalles de
+                            convocatoria</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
